@@ -1,11 +1,13 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='./dist', static_url_path='')
 
 
-@app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello World!'
+# Catch all route
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>', methods=['GET'])
+def catch_all(path):
+    return send_from_directory(app.static_folder, 'index.html')
 
 
 if __name__ == '__main__':
