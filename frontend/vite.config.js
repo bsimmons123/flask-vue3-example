@@ -21,4 +21,9 @@ export default defineConfig({
    build: {
     outDir: path.resolve(__dirname, '../dist'),
   },
+  server: {
+    proxy: {
+      '^/api': 'http://127.0.0.1:5000/'
+    }
+  }
 })
